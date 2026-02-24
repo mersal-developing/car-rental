@@ -7,7 +7,7 @@ export default function ContactPage() {
             <section className="hero hero-mini">
                 <img
                     className="hero-bg"
-                    src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1920"
+                    src="/hero-bg.jpg"
                     alt="Contact Us"
                 />
                 <div className="hero-content">
