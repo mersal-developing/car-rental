@@ -22,7 +22,7 @@ export default function AboutPage() {
             </section>
 
             {/* Welcome */}
-            <section className="about-section" style={{ background: 'var(--primary-bg)', padding: '80px 0' }}>
+            <section className="about-section" >
                 <div className="container">
                     <div className="about-grid">
                         <div className="about-text">
@@ -48,7 +48,7 @@ export default function AboutPage() {
             </section>
 
             {/* Driven by Passion & What Sets Us Apart */}
-            <section className="about-section" style={{ background: 'var(--secondary-bg)', padding: '80px 0' }}>
+            <section className="about-section" >
                 <div className="container">
                     <div className="about-grid">
                         <div className="about-text">
@@ -79,7 +79,7 @@ export default function AboutPage() {
             </section>
 
             {/* Values */}
-            <section className="about-section" style={{ background: 'var(--primary-bg)', padding: '80px 0' }}>
+            <section className="about-section" >
                 <div className="container">
                     <div className="about-values-grid">
                         <div className="value-card">

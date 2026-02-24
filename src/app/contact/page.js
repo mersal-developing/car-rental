@@ -52,7 +52,7 @@ export default function ContactPage() {
             </section>
 
             {/* Two Cities */}
-            <section className="branches-section" style={{ background: 'var(--primary-bg)' }}>
+            <section className="branches-section" >
                 <div className="container">
                     <h2 className="section-title">Two Cities, Countless Possibilities</h2>
                     <p className="section-subtitle">
