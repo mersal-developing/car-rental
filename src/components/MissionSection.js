@@ -1,24 +1,20 @@
 import Link from 'next/link';
 
-export default function MissionSection() {
+export default function MissionSection({ locale, t }) {
     return (
         <section className="mission-section">
-            <div className="container mission-container">
-                <div className="mission-text">
-                    <h2 className="section-title left-align">Our Mission</h2>
-                    <h3>Your Journey, Our Priority</h3>
-                    <p>
-                        At Mouj Muscat, our mission is simple: to enhance your travel experience by providing reliable,
-                        high-quality vehicles and exceptional customer service. We understand that each journey is unique,
-                        and we are dedicated to tailoring our services to meet your individual needs and preferences.
-                    </p>
-                    <Link href="/about" className="btn btn-primary" style={{ marginTop: '10px' }}>
-                        READ MORE
-                    </Link>
-                </div>
-                <div className="mission-graphic">
-                    <div className="target-icon">
-                        <i className="fas fa-bullseye"></i>
+            <div className="container">
+                <div className="mission-container">
+                    <div className="mission-text">
+                        <h2 className="section-title">{t.mission.title}</h2>
+                        <h3>{t.mission.subtitle}</h3>
+                        <p>{t.mission.text}</p>
+                        <Link href={`/${locale}/about`} className="btn btn-primary">{t.mission.cta}</Link>
+                    </div>
+                    <div className="mission-graphic">
+                        <div className="target-icon">
+                            <i className="fas fa-crosshairs"></i>
+                        </div>
                     </div>
                 </div>
             </div>

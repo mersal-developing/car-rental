@@ -1624,7 +1624,7 @@ img {
   }
 
   .hero-content p {
-    font-size: 0.9rem;
+    display: none;
   }
 
   .section-title {
@@ -1907,5 +1907,114 @@ img {
 
   .model-card-info h4 {
     font-size: 1.1rem;
+  }
+}
+
+/* =============================================
+   LANGUAGE SWITCHER
+   ============================================= */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  background: var(--primary);
+  color: var(--text-white) !important;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+  text-decoration: none;
+  min-width: 50px;
+  text-align: center;
+}
+
+.lang-switch:hover {
+  background: var(--accent);
+  color: var(--text-dark) !important;
+  transform: translateY(-1px);
+}
+
+.lang-switch-mobile {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 30px;
+  background: var(--accent);
+  color: var(--text-dark) !important;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* =============================================
+   RTL (Arabic) OVERRIDES
+   ============================================= */
+html[dir="rtl"] {
+  font-family: var(--font-arabic), var(--body-font);
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-arabic), var(--body-font);
+}
+
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .section-subtitle,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4 {
+  font-family: var(--font-arabic), var(--heading-font);
+}
+
+html[dir="rtl"] .navbar {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .nav-links {
+  direction: rtl;
+}
+
+html[dir="rtl"] .nav-icons {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .mission-text h2,
+html[dir="rtl"] .about-text h2 {
+  text-align: right;
+}
+
+html[dir="rtl"] .left-align {
+  text-align: right;
+}
+
+html[dir="rtl"] .contact-info-box {
+  text-align: right;
+}
+
+html[dir="rtl"] .branch-card {
+  text-align: right;
+}
+
+html[dir="rtl"] .feature-box {
+  text-align: center;
+}
+
+html[dir="rtl"] .fleet-breadcrumb {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .browse-link {
+  direction: ltr;
+}
+
+html[dir="rtl"] .mobile-menu a {
+  direction: rtl;
+}
+
+@media (max-width: 768px) {
+  html[dir="rtl"] .navbar {
+    flex-direction: row-reverse;
   }
 }

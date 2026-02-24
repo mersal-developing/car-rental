@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Navbar() {
+export default function Navbar({ locale, t }) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
@@ -17,26 +17,33 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Close mobile menu on route change
     useEffect(() => {
         setMobileOpen(false);
     }, [pathname]);
 
+    const otherLocale = locale === 'en' ? 'ar' : 'en';
+    const switchLocalePath = pathname.replace(`/${locale}`, `/${otherLocale}`);
+
     const links = [
-        { href: '/', label: 'Home' },
-        { href: '/about', label: 'About Us' },
-        { href: '/contact', label: 'Contact Us' },
-        { href: '/fleet', label: 'Our Fleet' },
-        { href: '/services', label: 'Our Services' },
+        { href: `/${locale}`, label: t.nav.home },
+        { href: `/${locale}/about`, label: t.nav.about },
+        { href: `/${locale}/contact`, label: t.nav.contact },
+        { href: `/${locale}/fleet`, label: t.nav.fleet },
+        { href: `/${locale}/services`, label: t.nav.services },
     ];
+
+    const isActive = (linkHref) => {
+        if (linkHref === `/${locale}`) return pathname === `/${locale}`;
+        return pathname.startsWith(linkHref);
+    };
 
     return (
         <>
             <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
                 <div className="logo">
-                    <Link href="/">
-                        Mouj Muscat<br />
-                        <span>Rent Car</span>
+                    <Link href={`/${locale}`}>
+                        {locale === 'ar' ? 'موج مسقط' : 'Mouj Muscat'}<br />
+                        <span>{locale === 'ar' ? 'تأجير سيارات' : 'Rent Car'}</span>
                     </Link>
                 </div>
 
@@ -45,7 +52,7 @@ export default function Navbar() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={pathname === link.href ? 'active' : ''}
+                            className={isActive(link.href) ? 'active' : ''}
                         >
                             {link.label}
                         </Link>
@@ -53,6 +60,9 @@ export default function Navbar() {
                 </div>
 
                 <div className="nav-icons">
+                    <Link href={switchLocalePath} className="lang-switch">
+                        {locale === 'en' ? 'عربي' : 'EN'}
+                    </Link>
                     <a href="tel:+96895855229" aria-label="Phone">
                         <i className="fas fa-phone phone-icon"></i>
                     </a>
@@ -69,18 +79,20 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Menu Overlay */}
             <div className={`mobile-menu ${mobileOpen ? 'active' : ''}`}>
                 {links.map((link) => (
                     <Link
                         key={link.href}
                         href={link.href}
-                        className={pathname === link.href ? 'active' : ''}
+                        className={isActive(link.href) ? 'active' : ''}
                         onClick={() => setMobileOpen(false)}
                     >
                         {link.label}
                     </Link>
                 ))}
+                <Link href={switchLocalePath} className="lang-switch-mobile" onClick={() => setMobileOpen(false)}>
+                    {locale === 'en' ? 'العربية' : 'English'}
+                </Link>
             </div>
         </>
     );
