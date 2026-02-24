@@ -9,8 +9,8 @@ export default function Home() {
       <section className="hero" id="home">
         <img
           className="hero-bg"
-          src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1920"
-          alt="Luxury Car Driving"
+          src="/hero-bg.jpg"
+          alt="Luxury Car on Oman Coastal Road"
         />
         <div className="hero-content">
           <h1>Mouj Muscat Car Rentals</h1>
