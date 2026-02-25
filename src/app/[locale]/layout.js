@@ -55,7 +55,7 @@ export default async function LocaleLayout({ children, params }) {
     const t = getTranslations(locale);
 
     return (
-        <html lang={locale} dir={dir} className={fontClasses}>
+        <html lang={locale} dir={dir} className={fontClasses} suppressHydrationWarning>
             <head>
                 <link
                     rel="stylesheet"
@@ -64,7 +64,7 @@ export default async function LocaleLayout({ children, params }) {
                     referrerPolicy="no-referrer"
                 />
             </head>
-            <body>
+            <body suppressHydrationWarning>
                 <Navbar locale={locale} t={t} />
                 <main>{children}</main>
                 <Footer locale={locale} t={t} />
