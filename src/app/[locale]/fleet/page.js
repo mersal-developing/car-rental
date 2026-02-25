@@ -1,27 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, use } from 'react';
 import { vehicles } from '@/data/vehicles';
 import InsuredFleet from '@/components/InsuredFleet';
 import DocumentsRequired from '@/components/DocumentsRequired';
 
 export default function FleetPage({ params: paramsPromise }) {
-    // Since this is a client component, we use React.use() pattern
-    // But for simplicity, we'll extract locale from window location
+    const { locale } = use(paramsPromise);
+
     const [activeCategory, setActiveCategory] = useState(null);
     const [activeBrand, setActiveBrand] = useState(null);
     const [activeModel, setActiveModel] = useState(null);
-
-    // Detect locale from URL path
-    const getLocale = () => {
-        if (typeof window !== 'undefined') {
-            const path = window.location.pathname;
-            if (path.startsWith('/ar')) return 'ar';
-        }
-        return 'en';
-    };
-
-    const locale = typeof window !== 'undefined' ? getLocale() : 'en';
 
     // Inline translations for client component
     const t = locale === 'ar' ? {
