@@ -126,16 +126,20 @@ export default async function HomePage({ params }) {
           <p className="discovery-text">{t.discovery.text}</p>
           <div className="dest-grid">
             <div className="dest-card">
-              <img src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&q=80&w=600" alt={t.cities.muscat} />
+              <img src="/oman-muscat-city.png" alt={t.cities.muscat} />
               <h4>{t.cities.muscat}</h4>
             </div>
             <div className="dest-card">
-              <img src="https://images.unsplash.com/photo-1541689592655-f5f52825a3b8?auto=format&fit=crop&q=80&w=600" alt={t.cities.salalah} />
-              <h4>{t.cities.salalah}</h4>
+              <img src="/oman-coastal-highway.png" alt={t.discovery.coastalHighway} />
+              <h4>{t.discovery.coastalHighway}</h4>
             </div>
             <div className="dest-card">
-              <img src="https://images.unsplash.com/photo-1547235001-d703406d3f17?auto=format&fit=crop&q=80&w=600" alt={t.discovery.wahibaSands} />
+              <img src="/oman-desert-dunes.png" alt={t.discovery.wahibaSands} />
               <h4>{t.discovery.wahibaSands}</h4>
+            </div>
+            <div className="dest-card">
+              <img src="/oman-mountains.png" alt={t.discovery.mountains} />
+              <h4>{t.discovery.mountains}</h4>
             </div>
           </div>
         </div>

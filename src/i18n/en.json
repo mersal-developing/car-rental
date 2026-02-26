@@ -67,7 +67,9 @@
     "discovery": {
         "title": "Discovery Oman",
         "text": "Embark on a transformative journey with our specialized services, guiding you to discover the rich tapestry of Oman. Our curated experiences seamlessly blend comfort and exploration, offering you a unique opportunity to delve into the captivating beauty of this Arabian gem. From the ancient traditions and cultural marvels to the breathtaking landscapes and hidden treasures, we invite you to uncover Oman's secrets with us.",
-        "wahibaSands": "Wahiba Sands"
+        "wahibaSands": "Wahiba Sands",
+        "coastalHighway": "Coastal Highway",
+        "mountains": "Mountains"
     },
     "about": {
         "heroTitle": "About Us",
