@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { BASE_URL, BRANCHES } from '@/lib/seo';
 
 export default function ContactPage() {
     const pathname = usePathname();
@@ -42,8 +43,53 @@ export default function ContactPage() {
         citiesTitle: 'Two Cities, Countless Possibilities',
     };
 
+    const contactSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: t.heroTitle,
+        url: `${BASE_URL}/${locale}/contact`,
+        mainEntity: [
+            {
+                '@type': 'LocalBusiness',
+                name: `Mouj Muscat Car Rentals — ${t.muscatOffice}`,
+                address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: BRANCHES.muscat.address,
+                    addressLocality: 'Muscat',
+                    addressCountry: 'OM',
+                },
+                telephone: BRANCHES.muscat.phone,
+                geo: {
+                    '@type': 'GeoCoordinates',
+                    latitude: BRANCHES.muscat.lat,
+                    longitude: BRANCHES.muscat.lng,
+                },
+            },
+            {
+                '@type': 'LocalBusiness',
+                name: `Mouj Muscat Car Rentals — ${t.salalahOffice}`,
+                address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: BRANCHES.salalah.address,
+                    addressLocality: 'Salalah',
+                    addressCountry: 'OM',
+                },
+                telephone: BRANCHES.salalah.phone,
+                geo: {
+                    '@type': 'GeoCoordinates',
+                    latitude: BRANCHES.salalah.lat,
+                    longitude: BRANCHES.salalah.lng,
+                },
+            },
+        ],
+    };
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+            />
             {/* Hero */}
             <section className="hero hero-mini">
                 <img className="hero-bg" src="/hero-bg.jpg" alt={t.heroTitle} />

@@ -4,6 +4,7 @@ import { useState, use } from 'react';
 import { vehicles } from '@/data/vehicles';
 import InsuredFleet from '@/components/InsuredFleet';
 import DocumentsRequired from '@/components/DocumentsRequired';
+import { BASE_URL } from '@/lib/seo';
 
 export default function FleetPage({ params: paramsPromise }) {
     const { locale } = use(paramsPromise);
@@ -52,6 +53,26 @@ export default function FleetPage({ params: paramsPromise }) {
     };
 
     const categories = Object.keys(vehicles);
+
+    const fleetSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: t.browseTitle,
+        url: `${BASE_URL}/${locale}/fleet`,
+        itemListElement: categories.map((cat, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+                '@type': 'Product',
+                name: cat,
+                description: t.browseSubtitle,
+                brand: {
+                    '@type': 'Organization',
+                    name: 'Mouj Muscat Car Rentals',
+                },
+            },
+        })),
+    };
 
     // Initialize category
     if (!activeCategory && categories.length > 0) {
@@ -170,6 +191,10 @@ export default function FleetPage({ params: paramsPromise }) {
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(fleetSchema) }}
+            />
             {/* Hero */}
             <section className="hero hero-mini">
                 <img className="hero-bg" src="/hero-bg.jpg" alt={t.heroTitle} />

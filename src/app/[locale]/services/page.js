@@ -1,4 +1,17 @@
 import { getTranslations } from '@/i18n/translations';
+import { BASE_URL } from '@/lib/seo';
+
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
+    return {
+        title: locale === 'ar'
+            ? 'خدماتنا | موج مسقط لتأجير السيارات'
+            : 'Our Services | Mouj Muscat Car Rentals',
+        alternates: {
+            canonical: `${BASE_URL}/${locale}/services`,
+        },
+    };
+}
 
 export default async function ServicesPage({ params }) {
     const { locale } = await params;
@@ -15,8 +28,33 @@ export default async function ServicesPage({ params }) {
         { icon: 'fas fa-road', title: t.services.service8, desc: t.services.service8Desc },
     ];
 
+    const servicesSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: locale === 'ar' ? 'خدماتنا' : 'Our Services',
+        url: `${BASE_URL}/${locale}/services`,
+        itemListElement: servicesList.map((s, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+                '@type': 'Service',
+                name: s.title,
+                description: s.desc,
+                provider: {
+                    '@type': 'Organization',
+                    name: 'Mouj Muscat Car Rentals',
+                    url: BASE_URL,
+                },
+            },
+        })),
+    };
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+            />
             {/* Hero */}
             <section className="hero hero-mini">
                 <img className="hero-bg" src="/hero-bg.jpg" alt={t.services.heroTitle} />

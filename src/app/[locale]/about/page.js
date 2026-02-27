@@ -1,12 +1,44 @@
 import StatsSection from '@/components/StatsSection';
 import { getTranslations } from '@/i18n/translations';
+import { BASE_URL } from '@/lib/seo';
+
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
+    const t = getTranslations(locale);
+    return {
+        title: locale === 'ar'
+            ? 'من نحن | موج مسقط لتأجير السيارات'
+            : 'About Us | Mouj Muscat Car Rentals',
+        description: t.about.welcomeText1,
+        alternates: {
+            canonical: `${BASE_URL}/${locale}/about`,
+        },
+    };
+}
 
 export default async function AboutPage({ params }) {
     const { locale } = await params;
     const t = getTranslations(locale);
 
+    const aboutPageSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        name: locale === 'ar' ? 'من نحن | موج مسقط لتأجير السيارات' : 'About Us | Mouj Muscat Car Rentals',
+        url: `${BASE_URL}/${locale}/about`,
+        description: t.about.welcomeText1,
+        publisher: {
+            '@type': 'Organization',
+            name: 'Mouj Muscat Car Rentals',
+            url: BASE_URL,
+        },
+    };
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+            />
             {/* Hero */}
             <section className="hero hero-mini">
                 <img className="hero-bg" src="/hero-bg.jpg" alt={t.about.heroTitle} />

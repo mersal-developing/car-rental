@@ -2,13 +2,106 @@ import Link from 'next/link';
 import StatsSection from '@/components/StatsSection';
 import MissionSection from '@/components/MissionSection';
 import { getTranslations } from '@/i18n/translations';
+import { BASE_URL, BRANCHES } from '@/lib/seo';
+
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const t = getTranslations(locale);
+  return {
+    title: locale === 'ar'
+      ? 'تأجير سيارات في مسقط وصلالة | موج مسقط'
+      : 'Car Rental in Muscat & Salalah | Mouj Muscat',
+    description: t.fleet.subtitle,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+    },
+  };
+}
 
 export default async function HomePage({ params }) {
   const { locale } = await params;
   const t = getTranslations(locale);
 
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Mouj Muscat Car Rentals',
+    url: BASE_URL,
+    logo: `${BASE_URL}/hero-bg.jpg`,
+    email: 'info@moujrentcar.com',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: BRANCHES.muscat.phone,
+        contactType: 'customer service',
+        areaServed: 'OM',
+        availableLanguage: ['Arabic', 'English'],
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: BRANCHES.salalah.phone,
+        contactType: 'customer service',
+        areaServed: 'OM',
+        availableLanguage: ['Arabic', 'English'],
+      },
+    ],
+  };
+
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AutoRental',
+    name: 'Mouj Muscat Car Rentals',
+    url: BASE_URL,
+    image: `${BASE_URL}/hero-bg.jpg`,
+    email: 'info@moujrentcar.com',
+    priceRange: '$$',
+    currenciesAccepted: 'OMR',
+    location: [
+      {
+        '@type': 'Place',
+        name: 'Mouj Muscat — Muscat Branch',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BRANCHES.muscat.address,
+          addressLocality: 'Muscat',
+          addressCountry: 'OM',
+        },
+        telephone: BRANCHES.muscat.phone,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: BRANCHES.muscat.lat,
+          longitude: BRANCHES.muscat.lng,
+        },
+      },
+      {
+        '@type': 'Place',
+        name: 'Mouj Muscat — Salalah Branch',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BRANCHES.salalah.address,
+          addressLocality: 'Salalah',
+          addressCountry: 'OM',
+        },
+        telephone: BRANCHES.salalah.phone,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: BRANCHES.salalah.lat,
+          longitude: BRANCHES.salalah.lng,
+        },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
       {/* Hero */}
       <section className="hero" id="home">
         <img
