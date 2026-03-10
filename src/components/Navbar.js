@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Navbar({ locale, t }) {
@@ -42,8 +43,14 @@ export default function Navbar({ locale, t }) {
             <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
                 <div className="logo">
                     <Link href={`/${locale}`}>
-                        {locale === 'ar' ? 'موج مسقط' : 'Mouj Muscat'}<br />
-                        <span>{locale === 'ar' ? 'تأجير سيارات' : 'Rent Car'}</span>
+                        <Image
+                            src="/logo.png"
+                            alt="TRSA Luxury Car Rental"
+                            width={120}
+                            height={60}
+                            style={{ objectFit: 'contain' }}
+                            priority
+                        />
                     </Link>
                 </div>
 
